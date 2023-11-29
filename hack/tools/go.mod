@@ -1,6 +1,6 @@
 module github.com/kubewharf/godel-scheduler-api/hack/tools
 
-go 1.21.4
+go 1.21
 
 require sigs.k8s.io/controller-tools v0.6.0
 

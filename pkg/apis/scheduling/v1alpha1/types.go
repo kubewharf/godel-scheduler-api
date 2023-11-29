@@ -3,6 +3,14 @@ package v1alpha1
 import (
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
+)
+
+type SchedulerNodePartitionType string
+
+const (
+	Physical SchedulerNodePartitionType = "Physical"
+	Logical  SchedulerNodePartitionType = "Logical"
 )
 
 // +genclient
@@ -48,6 +56,11 @@ type SchedulerStatus struct {
 	// TODO: investigate whether we need a separate API object for this
 	// +optional
 	MetricsStatus *SchedulerAggregatedMetricsStatus `json:"metricsStatus,omitempty"`
+
+	// This field shows the node partition is physical or logical
+	// that is to say: whether one scheduler can select nodes among other schedulers' partitions
+	// +optional
+	NodePartitionType SchedulerNodePartitionType `json:"nodePartitionType,omitempty"`
 
 	// SchedulerNodePartitionName is the name of NodePartition which contains all the nodes in this scheduler's partition
 	// +optional
@@ -343,4 +356,19 @@ type PodGroupList struct {
 
 	// Items is the list of PodGroup
 	Items []PodGroup `json:"items"`
+}
+
+// OwnerInfo holds the information of task owner
+type OwnerInfo struct {
+	// Owner type, e.g. ReplicaSet/StatefulSet...
+	Type string `json:"type"`
+
+	// Owner name
+	Name string `json:"name"`
+
+	// Owner namespace
+	Namespace string `json:"namespace"`
+
+	// Owner uid
+	UID types.UID `json:"uid"`
 }

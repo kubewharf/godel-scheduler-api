@@ -1,6 +1,6 @@
 module github.com/kubewharf/godel-scheduler-api
 
-go 1.21.4
+go 1.21
 
 require (
 	k8s.io/api v0.24.6
