@@ -94,6 +94,10 @@ type SchedulerList struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:printcolumn:name="Status",type="string",JSONPath=".status.phase",priority=1,description="The current status of the PodGroup"
+// +kubebuilder:printcolumn:name="MinMember",type="integer",JSONPath=".spec.minMember",priority=1,description="The minimal number of members/tasks to run the PodGroup"
+// +kubebuilder:printcolumn:name="TimeoutSeconds",type="integer",JSONPath=".spec.scheduleTimeoutSeconds",priority=1,description="The maximal time of tasks to wait before running the PodGroup"
+// +kubebuilder:printcolumn:name="Age",type="date",JSONPath=".metadata.creationTimestamp"
 type PodGroup struct {
 	metav1.TypeMeta `json:",inline"`
 	// Standard object's metadata.
