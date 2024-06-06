@@ -27,7 +27,7 @@ spec:
       name: MinMember
       priority: 1
       type: integer
-    - description: The maximal time of tasks to wait before run the PodGroup
+    - description: The maximal time of tasks to wait before running the PodGroup
       jsonPath: .spec.scheduleTimeoutSeconds
       name: TimeoutSeconds
       priority: 1
