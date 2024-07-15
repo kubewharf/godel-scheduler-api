@@ -394,7 +394,7 @@ type MovementSpec struct {
 type MovementStatus struct {
 	// A list of movement info for all owners
 	// +optional
-	OwnerMovements []*OwnerMovement `json:"ownerMovements,omitempty"`
+	Owners []*Owner `json:"owners,omitempty"`
 
 	// Names of godel schedulers which have received this movement crd
 	// +optional
@@ -402,20 +402,20 @@ type MovementStatus struct {
 }
 
 // Contain node suggestions for each owner
-type OwnerMovement struct {
+type Owner struct {
 	// Information of task owner
 	Owner *OwnerInfo `json:"owner"`
 
 	// Information of suggested nodes
-	NodeSuggestions []*NodeSuggestion `json:"nodeSuggestions,omitempty"`
+	RecommendedNodes []*RecommendedNode `json:"recommendedNodes,omitempty"`
 
 	// Tasks scheduled successfully but not use suggestion
 	// +optional
-	TasksBreakSuggestion []*TaskInfo `json:"tasksBreakSuggestion,omitempty"`
+	MismatchedTasks []*TaskInfo `json:"mismatchedTasks,omitempty"`
 }
 
 // Contain desired state and actual state for node
-type NodeSuggestion struct {
+type RecommendedNode struct {
 	// Node Name
 	Node string `json:"node,omitempty"`
 
